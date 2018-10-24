@@ -1,0 +1,58 @@
+{
+  "host" : "fau.loboviz.com",
+  "cgi" : "cgi-data/nph-data.cgi",
+  "nodes" : {
+    "IRL-LP" : {"serial_number" : 35, "name" : "Indian River Lagoon - Link Port", "valid_measurements" : ["weather","water"], "coordinates" : { "lat" : -80.343113,"long" : 27.534830,"alt" : 0}},
+    "IRL-FP" : {"serial_number" : 54, "name" : "Indian River Lagoon - Fort Pierce", "valid_measurements" : ["water"], "coordinates" : { "lat" : -80.326607,"long" : 27.475555, "alt" : 0}},
+    "IRL-VB" : {"serial_number" : 55, "name" : "Indian River Lagoon - Vero Beach", "valid_measurements" : ["water"], "coordinates" : { "lat" : -80.355258,"long" : 27.590117, "alt" : 0}},
+    "IRL-SB" : {"serial_number" : 56, "name" : "Indian River Lagoon - Sebastian", "valid_measurements" : ["water"], "coordinates" : { "lat" : -80.470822,"long" : 27.839089, "alt" : 0} },
+    "IRL-JB" : {"serial_number" : 62, "name" : "Indian River Lagoon - Jensen Beach", "valid_measurements" : ["weather","water"], "coordinates" : { "lat" : -80.202333000,"long" : 27.224389000, "alt" : 0}  },
+    "IRL-SLE" : {"serial_number" : 61, "name" : "Indian River Lagoon - St. Lucie Estuary", "valid_measurements" : ["weather","water"] , "coordinates" : { "lat" : -80.171844444,"long" : 27.164947222, "alt" : 0} },
+    "SLE-ME" : {"serial_number" : 60, "name" : "St. Lucie Estuary - Middle Estuary", "valid_measurements" : ["weather","water"],"coordinates" : { "lat" : -80.247974000,"long" : 27.208928000, "alt" : 0}  },
+    "SLE-NF" : {"serial_number" : 58, "name" : "St. Lucie Estuary - North Fork", "valid_measurements" : ["weather","water"] ,"coordinates" : { "lat" : -80.269200000,"long" : 27.210028000, "alt" : 0} },
+    "SLE-SF" : {"serial_number" : 57, "name" : "St. Lucie Estuary - South Fork", "valid_measurements" : ["weather","water"] , "coordinates" : { "lat" : -80.264180000,"long" : 27.187789000, "alt" : 0}},
+    "SLE-SF2": {"serial_number": 68, "name": "St. Lucie Estuary - South Fork 2", "valid_measurements": ["weather", "water"], "coordinates" : { "lat" : -80.282866667,"long" : 27.114183333, "alt" : 0}  },
+    "IRL-HB" : {"serial_number": 36, "name": "Indian River Lagoon - Harbor Branch", "valid_measurements": [], "coordinates" : { "lat" : -80.354368,"long" : 27.534357, "alt" : 0} }
+  },
+  "measurements" : {
+    "water" : {
+       "cdom " : "colored dissolved organic matter [QSDE]",
+      "chlorophyll " : "chlorophyll [micro g/l]",
+      "conductivity " : "conductivity [S/m]",
+      "current_direction " : "current direction [deg]",   "current_speed " : "current speed [mm/s]",   "current_speed_fts " : "current speed [ft/s]",
+      "depth " : "depth of instrument [m]",   "depth_ft " : "depth of instrument [ft]",
+      "oxygen_mgl " : "dissolved oxygen [mg/l]",
+      "nitrate" : " nitrate [micro M]",   "nitrate_mgl " : "nitrate [mg N/L]",
+      "oxygen_sat_mgl " : "oxygen saturation [mg/l]",   "oxygen_percent " : "oxygen saturation [%]",
+      "ph" : "pH",
+      "phosphate " : "phosphate concentration [micro M]",   "phosphate_mgl " : "phosphate concentration [mg P/L]",
+      "pressure " : "pressure [dbar]",
+      "salinity " : "salinity",
+      "temperature " : "temperature [deg C]",   "temperature_f " : "temperature [deg F]",
+      "turbidity " : "turbidity [NTU]"
+    },
+    "weather" : {
+      "weather_temperature" : "air temperature [deg C]",
+      "weather_temperature_f" : "air temperature [deg F]",
+      "weather_humidity" : "humidity [%]",
+      "weather_pressure" : "pressure [mbar]",
+      "weather_pressure_inhg" : "pressure [inHg]",
+      "weather_rain" : "rain [mm/h]",
+      "weather_rain_in" : "rain [in/h]",
+      "weather_par" : "solar radiation [micromol/m2/s]",
+      "weather_wind_direction" : "wind direction [deg]",
+      "weather_wind_gust_ms" : "wind gust [m/s]",
+      "weather_wind_gust" : "wind gust [mph]",
+      "weather_wind_speed_ms " : "wind speed [m/s]",
+      "weather_wind_speed " : "wind speed [mph]"
+    }
+  },
+  "queries" : {
+    "date": "date", "day": "day number", "cdom": "colored dissolved organic matter [QSDE]", "conductivity": "conductivity [S/m]",
+    "depth": "depth of instrument [m]", "depth_ft": "depth of instrument [ft]",
+    "oxygen": "dissolved O2 [ml/l]", "nitrate": "nitrate [micro M]",
+    "nitrate_mgl": "nitrate [mg N/L]", "oxygen_sat": "O2 saturation [ml/l]",
+    "phosphate_mgl": "phosphate [mg P/L]", "phosphate": "phosphate [micro M]",
+    "salinity": "salinity", "temperature": "temperature [deg C]", "turbidity": "turbidity [NTU]"
+  }
+}
