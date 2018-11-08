@@ -33,6 +33,7 @@ class Lobo(object):
         self.json_file =  json
         self.load_json()
         self.set_base_url()
+        self.load_nodes()
 
     def check_json_file(self):
         '''
@@ -49,9 +50,9 @@ class Lobo(object):
         '''
         self.check_json_file()
         with open(self.json_file, "r") as json_file:
-            json_data = json.load(json_file)
-            self.host = json_data['host']
-            self.cgi =  json_data['cgi']
+            self.json_data = json.load(json_file)
+            self.host = self.json_data['host']
+            self.cgi =  self.json_data['cgi']
             #sys.exit(0)
 
     def set_base_url(self):
@@ -78,8 +79,6 @@ class Lobo(object):
 
 
     def parse_response(self,response,measurements):
-
-
         response_data = response.read().decode('utf-8').split("\n")
         for line_num, response_line in enumerate(response_data):
             data = response_line.split("\t")
@@ -102,10 +101,10 @@ class Lobo(object):
 
 
     def load_nodes(self):
-        self.nodes = [] # list of nodes - using a list as there are few nodes, change this to a dict of id : node object
-        for id in self.json_data.nodes:
-            node = Node(id, self.json_data.nodes[id])
-            self.nodes.append(node)
+        self.nodes = {} # list of nodes - using a list as there are few nodes, change this to a dict of id : node object
+        for id in self.json_data['nodes']:
+            node = Node(id, self.json_data['nodes'][id])
+            self.nodes[id] = node
 
     def load_measurements(self):
         self.measurements = {}
@@ -117,23 +116,18 @@ class Lobo(object):
     def load_measurements(self):
         pass
 
-    def set_data_range(self):
-        '''
-        start_year - year in the format yyyy
-        start_month - month in the format mm
-        start_day - day in the formay dd
-        end_year - yyyy year
-        end_month - mm number
-        end_day - dd number
-        :return:
-        '''
 
-    def fetch_data(self,node=36,dates=["20160901","20160929"],measurements=["temperature", "cdom"],format="text"):
+
+
+    def fetch_data(self,node=35,dates=["20160901","20160929"],measurements=["temperature", "cdom"],format="text"):
         #node = 35 # replace this with node object so this will be node.serial_number
         #dates = ["20160901","20160929"]
         #measurements = ["cdom"]
         query_values = {'y': ",".join(measurements)}
         query_values['data_format'] = "xml"
+        if dates is not None:
+            query_values['min_date'] = dates[0]
+            query_values['max_date'] = dates[1]
         query_values['node'] = node
         #add with query_values[key] = value
 
@@ -142,8 +136,17 @@ class Lobo(object):
         #return query_data
         self.web_request(query_data,measurements)
 
-
+    def get_node_by_name(self, name_string):
+        if name_string in self.nodes:
+            return self.nodes[name_string].serial_number
+        else:
+            print(self.nodes)
+            print("Could not find id for node {}".format(name_string))
+            return None
 
 if  __name__ == '__main__':
     lobo = Lobo()
-    lobo.fetch_data()
+
+    id = lobo.get_node_by_name("IRL-FP")
+
+    lobo.fetch_data(node=id, measurements=["temperature", "salinity"],dates=['20181101','20181101'])
