@@ -14,7 +14,7 @@ import json
 import traceback
 from pprint import pprint
 
-from Node import Node
+from node import Node
 
 class Lobo(object):
     '''
@@ -75,20 +75,24 @@ class Lobo(object):
             sys.exit(1)
         # this_content = response.readall().decode('utf-8')
         # print (self.base_url, query_data)
-        self.parse_response(response, measurements)
+        return self.parse_response(response, measurements)
 
 
     def parse_response(self,response,measurements):
         response_data = response.read().decode('utf-8').split("\n")
+        results = []
         for line_num, response_line in enumerate(response_data):
             data = response_line.split("\t")
             if line_num<3:
                 continue
             if len(data) == len(measurements)+1:
                 x, *y = data
-                print(x, y[0],y[1])
+        #        print(x, ",".join(y))
+                results.append((x, y))
             else:
                 pass
+
+        return results
         # example response
         # Sensor 0035 - IRL-LP
         # Indian River Lagoon - Link Port
@@ -134,7 +138,9 @@ class Lobo(object):
         query_data = urllib.parse.urlencode(query_values)  # I added this
         query_data = query_data.encode('utf-8')  # I added this
         #return query_data
-        self.web_request(query_data,measurements)
+        results = self.web_request(query_data,measurements)
+
+        return results
 
     def get_node_by_name(self, name_string):
         if name_string in self.nodes:
@@ -147,6 +153,9 @@ class Lobo(object):
 if  __name__ == '__main__':
     lobo = Lobo()
 
-    id = lobo.get_node_by_name("IRL-FP")
+    #id = lobo.get_node_by_name("IRL-FP")
+    id = 35
+    date = "20170320"
+    results_list  = lobo.fetch_data(node=id, measurements=["temperature","salinity"],dates=[date,date])
 
-    lobo.fetch_data(node=id, measurements=["temperature", "salinity"],dates=['20181101','20181101'])
+    print(results_list)
